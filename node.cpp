@@ -4,10 +4,18 @@
 
 #include "node.h"
 #include <vector>
+#include <math.h>
 std::vector<int> openset,closeset;
 node::node(int x, int y) {
     this->x=x;
     this->y=y;
+    this->f=0;
+    this->h=0;
+    this->g=0;
+}
+node::node() {
+    this->x=0;
+    this->y=0;
     this->f=0;
     this->h=0;
     this->g=0;
@@ -44,4 +52,13 @@ void node::getNeighbor(){
         this->neighbor[Down][X]=NOTSPOT;
         this->neighbor[Down][Y]=NOTSPOT;
     }
+}
+void node::cal_(node last,node end) {
+    this->g=last.g+1;
+    this->h=abs(this->x-end.x)+abs(this->y-end.y);
+    this->f=this->g+this->h;
+}
+void node::init(node last,dir udlr) {
+    this->x=last.neighbor[udlr][X];
+    this->y=last.neighbor[udlr][Y];
 }

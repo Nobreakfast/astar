@@ -25,9 +25,12 @@ public:
     int x, y;
     int f, g, h;
     node(int x,int y);
+    node();
     ~node();
     int neighbor[4][2];
     void getNeighbor();
+    void cal_(node last, node end);
+    void init(node last,dir udlr);
 };
 
 
