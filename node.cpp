@@ -37,7 +37,7 @@ void node::getNeighbor(){
     this->neighbor[Up][X]=this->x;
     this->neighbor[Up][Y]=this->y-1;
     this->neighbor[Down][X]=this->x;
-    this->neighbor[Down][y]=this->y+1;
+    this->neighbor[Down][Y]=this->y+1;
     this->neighbor[Left][X]=this->x-1;
     this->neighbor[Left][Y]=this->y;
     this->neighbor[Right][X]=this->x+1;
@@ -106,4 +106,7 @@ void node::init() {
             this->neighbor[i][j]=0;
         }
     }
+}
+bool node::isGoal(node point) {
+    return ((this->x==point.x )&& (this->y==point.y));
 }

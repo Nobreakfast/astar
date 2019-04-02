@@ -24,6 +24,7 @@ class node {
 public:
     int x, y;
     int f, g, h;
+    node* parents;
     node(int x,int y);
     node();
     ~node();
@@ -33,6 +34,7 @@ public:
     void init(node last,dir udlr);
     void init(int x,int y);
     void init();
+    bool isGoal(node point);
 };
 
 
