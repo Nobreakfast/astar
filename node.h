@@ -31,6 +31,8 @@ public:
     void getNeighbor();
     void cal_(node last, node end);
     void init(node last,dir udlr);
+    void init(int x,int y);
+    void init();
 };
 
 

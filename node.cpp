@@ -12,6 +12,11 @@ node::node(int x, int y) {
     this->f=0;
     this->h=0;
     this->g=0;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            this->neighbor[i][j]=0;
+        }
+    }
 }
 node::node() {
     this->x=0;
@@ -19,6 +24,11 @@ node::node() {
     this->f=0;
     this->h=0;
     this->g=0;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            this->neighbor[i][j]=0;
+        }
+    }
 }
 node::~node() {
 
@@ -61,4 +71,39 @@ void node::cal_(node last,node end) {
 void node::init(node last,dir udlr) {
     this->x=last.neighbor[udlr][X];
     this->y=last.neighbor[udlr][Y];
+    this->f=0;
+    this->h=0;
+    this->g=0;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            this->neighbor[i][j]=0;
+        }
+    }
+}
+
+void node::init(int x, int y) {
+    this->x=x;
+    this->y=y;
+    this->f=0;
+    this->h=0;
+    this->g=0;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            this->neighbor[i][j]=0;
+        }
+    }
+
+}
+
+void node::init() {
+    this->x=0;
+    this->y=0;
+    this->f=0;
+    this->h=0;
+    this->g=0;
+    for (int i = 0; i < 4; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            this->neighbor[i][j]=0;
+        }
+    }
 }
