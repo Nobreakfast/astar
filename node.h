@@ -59,12 +59,12 @@ public:
     bool isEmpty();
 
     bool isExist(spot value);
-
+    bool isEqual(spot value1,spot value2);
     void search(spot value);
 
-    void delThis(node value);
+    void delThis(spot value);
 
-    void delAfter(node value);
+    void delAfter(spot value);
 
     void printList();
 
