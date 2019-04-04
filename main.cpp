@@ -1,6 +1,7 @@
 #include <iostream>
 #include "node.h"
 #include <math.h>
+
 using namespace std;
 
 int main() {
@@ -15,22 +16,35 @@ int main() {
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
     };
-    linklist open;
-    spot point1;
-    point1.x=1;
-    point1.y=2;
-    spot point2;
-    point2.x=3;
-    point2.y=4;
-    open.init(point1);
-    open.addBegin(point2);
-    open.addEnd(point2);
-    open.addEnd(point2);
-    open.addEnd(point2);
-    open.addEnd(point2);
-    open.addEnd(point2);
-    open.addEnd(point1);
-    open.delThis(point1);
-    open.printList();
+    linklist open, close;
+    open.init();
+    close.init();
+    spot start(1, 1), goal(1, 1);
+    open.addEnd(start);
+    while (!open.isEmpty()) {
+        spot *q=open.smallF();
+        if(open.isEqual(*q,goal))
+            break;
+        open.delThis(*q);
+        close.addEnd(*q);
+        q->cal_F(start,goal);
+        q->getNeighbor();
+        spot neighbor[4];
+        for (int i = 0; i < 4; ++i) {
+            neighbor[i].x=q->neighbor[i][X];
+            neighbor[i].y=q->neighbor[i][Y];
+
+            if(close.isExist(neighbor[i]))
+                continue;
+
+            neighbor[i].cal_F(*q,goal);
+
+            if(!open.isExist(neighbor[i]))
+                open.addEnd(neighbor[i]);
+            else ;  //if the neighbor.f is larger than the neighbor.f in the openset
+            // need to wirte a function in spot *linklist::search;
+        }
+    }
+
     return 0;
 }

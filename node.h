@@ -6,6 +6,7 @@
 #define ASTAR_NODE_H
 
 #include <iostream>
+#include <math.h>
 using namespace std;
 #define NOTSPOT 99
 #define ROW 8
@@ -27,13 +28,11 @@ class spot {
 public:
     int x, y;
     int f, g, h;
-    spot(){
-        this->x=0;
-        this->y=0;
-        this->f=0;
-        this->g=0;
-        this->h=0;
-    };
+    int neighbor[4][2];
+    spot();
+    spot(int x,int y);
+    int cal_F(spot prev,spot goal);
+    void getNeighbor();
 };
 
 struct node{
@@ -42,19 +41,20 @@ struct node{
     node *next= nullptr;
 };
 
+
 class linklist {
 public:
     node *start;
     node *small;
     linklist();
 
-    void init(spot value);
+    void init();
 
     void addBegin(spot value);
 
     void addEnd(spot value);
-//
-//    node* smallF();
+
+    spot* smallF();
 
     bool isEmpty();
 

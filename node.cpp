@@ -4,12 +4,49 @@
 
 #include "node.h"
 
+spot::spot() {
+
+    this->x = 99;
+    this->y = 99;
+    this->f = 99;
+    this->g = 0;
+    this->h = 0;
+}
+
+spot::spot(int x, int y) {
+
+    this->x = x;
+    this->y = y;
+    this->f = 99;
+    this->g = 0;
+    this->h = 0;
+}
+
+int spot::cal_F(spot prev, spot goal) {
+    this->g = prev.g + 1;
+    this->h = abs(this->x - goal.x) + abs(this->y - goal.y);
+    this->f = this->g + this->h;
+    return this->f;
+}
+
+void spot::getNeighbor() {
+    neighbor[Up][X] = (this->y==0)?NOTSPOT:this->x;
+    neighbor[Up][Y] = (this->y==0)?NOTSPOT:this->y - 1;
+    neighbor[Down][X] = (this->y==COL-1)?NOTSPOT:this->x;
+    neighbor[Down][Y] = (this->y==COL-1)?NOTSPOT:this->y + 1;
+    neighbor[Left][X]=(this->x==0)?NOTSPOT:this->x-1;
+    neighbor[Left][Y]=(this->x==0)?NOTSPOT:this->y;
+    neighbor[Right][X] = (this->x==ROW-1)?NOTSPOT:this->x + 1;
+    neighbor[Right][Y] = (this->x==ROW-1)?NOTSPOT:this->y;
+}
+
 linklist::linklist() {
     start = nullptr;
     small = nullptr;
 }
 
-void linklist::init(spot value) {
+void linklist::init() {
+    spot value;
     struct node *s, *temp;
     temp = new(struct node);
     temp->info = value;
@@ -17,6 +54,7 @@ void linklist::init(spot value) {
     if (start == nullptr) {
         temp->prev = nullptr;
         start = temp;
+        small = temp;
     } else {
         s = start;
         while (s->next != nullptr)
@@ -24,6 +62,7 @@ void linklist::init(spot value) {
         s->next = temp;
         temp->prev = s;
     }
+
 }
 
 void linklist::addBegin(spot value) {
@@ -52,20 +91,28 @@ void linklist::addEnd(spot value) {
     cout << "element inserted at end" << endl;
 }
 
-//node* linklist::smallF() {
-//
-//}
+spot *linklist::smallF() {
+    node *q = start;
+    while (q->next != nullptr) {
+        q = q->next;
+        if (q->info.f < small->info.f)
+            small = q;
+    }
+    return &(small->info);
+
+}
+
 bool linklist::isEmpty() {
-    return (start == nullptr);
+    return (start->next == nullptr);
 }
 
 bool linklist::isExist(spot value) {
     node *q = this->start;
     int a = 0;
     while (q->next != nullptr) {
+        q = q->next;
         if ((q->info.x == value.x) && (q->info.y == value.y))
             a = 1;
-        q = q->next;
     }
     return a == 1;
 
@@ -81,23 +128,32 @@ void linklist::search(spot value) {
 
 void linklist::delThis(spot value) {
     node *temp, *q = start, *prev, *next;
+
     while (q->next != nullptr) {
         if (isEqual(q->next->info, value)) {
             break;
         }
         q = q->next;
     }
-    temp=q->next;
-    next=temp->next;
-    prev=temp->prev;
-    prev->next=next;
-    if(next!= nullptr)
-        next->prev=prev;
+    temp = q->next;
+    next = temp->next;
+    prev = temp->prev;
+    prev->next = next;
+    if (next != nullptr)
+        next->prev = prev;
 
 }
 
 void linklist::delAfter(spot value) {
-
+    node *temp, *q = start;
+    while (q->next != nullptr) {
+        if (isEqual(q->next->info, value)) {
+            break;
+        }
+        q = q->next;
+    }
+    temp = q;
+    temp->next = nullptr;
 }
 
 void linklist::printList() {
