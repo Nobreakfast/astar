@@ -34,8 +34,8 @@ public:
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 0, 0, 0},
+            {0, 0, 1, 0, 1, 0, 0, 0},
+            {0, 1, 1, 0, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
     };
@@ -71,12 +71,14 @@ public:
     bool isExist(spot value);
     bool isEqual(spot value1,spot value2);
     spot* search(spot value);
+    spot* getEnd();
 
     void delThis(spot value);
 
     void delAfter(spot value);
 
     void printList();
+    spot *smallH();
 
 };
 

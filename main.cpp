@@ -5,7 +5,6 @@
 using namespace std;
 
 int main() {
-    int flag=0;
     std::cout << "Hello, World!" << std::endl;
     linklist open, close;
     open.init();
@@ -13,49 +12,48 @@ int main() {
     spot start(1, 1), goal(7, 7);
     start.f=3;
     open.addEnd(start);
-
+    spot *check=new spot(99,99);
     while (!open.isEmpty()) {
-        spot *q=open.smallF();
+        spot *q=open.smallH();
 
         open.delThis(*q);
+        close.addEnd(*q);
 
         q->getNeighbor();
         q->cal_F(start,goal);
 
+        if(open.isEqual(*q,goal))
+        {
+            break;
+        }
         spot neighbor[4];
 
         for (int i = 0; i < 4; ++i) {
             neighbor[i].x=q->neighbor[i][X];
             neighbor[i].y=q->neighbor[i][Y];
 
+
             if(neighbor[i].x==NOTSPOT)
                 continue;
-            if(open.isEqual(neighbor[i],goal))
-            {
-                flag=1;
-                    break;
-            }
 
             neighbor[i].cal_F(*q,goal);
 
+
             if(open.isExist(neighbor[i]))
             {
-                spot *exist=open.search(neighbor[i]);
-                if(exist->f<=neighbor[i].f)
-                    continue;
-            }
-
-            if(close.isExist(neighbor[i]))
-            {
-                spot *exist=close.search(neighbor[i]);
-                if(exist->f<=neighbor[i].f)
+                if(neighbor[i].h>=q->g)
                     continue;
             }
             else
                 open.addEnd(neighbor[i]) ;
+
+            if(close.isExist(neighbor[i]))
+            {
+                    continue;
+            }
         }
-        close.addEnd(*q);
-        if(flag){flag=0;break;}
+
+
     }
     open.printList();
     cout<<"next"<<endl;

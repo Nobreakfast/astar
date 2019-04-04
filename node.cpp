@@ -94,9 +94,21 @@ void linklist::addEnd(spot value) {
 
 spot *linklist::smallF() {
     node *q = start;
+    small->info.f=99;
     while (q->next != nullptr) {
         q = q->next;
         if (q->info.f <= small->info.f)
+            small = q;
+    }
+    return &(small->info);
+
+}
+spot *linklist::smallH() {
+    node *q = start;
+    small->info.h=99;
+    while (q->next != nullptr) {
+        q = q->next;
+        if (q->info.h <= small->info.h)
             small = q;
     }
     return &(small->info);
@@ -130,6 +142,15 @@ spot* linklist::search(spot value) {
         q=q->next;
         if(this->isEqual(q->info,value))
             break;
+    }
+    return &(q->info);
+}
+
+spot* linklist::getEnd() {
+    node *q=this->start;
+    while(q->next!= nullptr)
+    {
+        q=q->next;
     }
     return &(q->info);
 }
