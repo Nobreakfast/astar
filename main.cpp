@@ -19,32 +19,59 @@ int main() {
     linklist open, close;
     open.init();
     close.init();
-    spot start(1, 1), goal(1, 1);
+    spot start(1, 1), goal(2, 2);
+    start.f=3;
     open.addEnd(start);
-    while (!open.isEmpty()) {
-        spot *q=open.smallF();
-        if(open.isEqual(*q,goal))
-            break;
-        open.delThis(*q);
-        close.addEnd(*q);
-        q->cal_F(start,goal);
-        q->getNeighbor();
-        spot neighbor[4];
-        for (int i = 0; i < 4; ++i) {
-            neighbor[i].x=q->neighbor[i][X];
-            neighbor[i].y=q->neighbor[i][Y];
-
-            if(close.isExist(neighbor[i]))
-                continue;
-
-            neighbor[i].cal_F(*q,goal);
-
-            if(!open.isExist(neighbor[i]))
-                open.addEnd(neighbor[i]);
-            else ;  //if the neighbor.f is larger than the neighbor.f in the openset
-            // need to wirte a function in spot *linklist::search;
-        }
-    }
+    open.printList();
+    cout<<"next"<<endl;
+    open.delThis(start);
+    open.printList();
+//    while (!open.isEmpty()) {
+//        spot *q=open.smallF();
+//        open.delThis(start);
+//
+////        if(open.isEqual(*q,goal))
+////            break;
+//
+//        q->getNeighbor();
+//        q->cal_F(start,goal);
+//
+//        open.delThis(*q);
+//        close.addEnd(*q);
+//        spot neighbor[4];
+//
+//        for (int i = 0; i < 4; ++i) {
+//            neighbor[i].x=q->neighbor[i][X];
+//            neighbor[i].y=q->neighbor[i][Y];
+//
+//
+//            if(!open.isEqual(neighbor[i],goal))
+//            {
+//                    break;
+//            }
+//
+//            neighbor[i].cal_F(*q,goal);
+//
+//            if(open.isExist(neighbor[i]))
+//            {
+//                spot *exist=open.search(neighbor[i]);
+//                if(exist->f<=neighbor[i].f)
+//                    continue;
+//            }
+//
+//            if(close.isExist(neighbor[i]))
+//            {
+//                spot *exist=close.search(neighbor[i]);
+//                if(exist->f<=neighbor[i].f)
+//                    continue;
+//                else
+//                    open.addEnd(neighbor[i]);
+//            }
+//        }
+//        close.addEnd(*q);
+//    }
+//    open.printList();
+//    close.printList();
 
     return 0;
 }

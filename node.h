@@ -60,7 +60,7 @@ public:
 
     bool isExist(spot value);
     bool isEqual(spot value1,spot value2);
-    void search(spot value);
+    spot* search(spot value);
 
     void delThis(spot value);
 

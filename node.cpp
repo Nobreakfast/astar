@@ -122,25 +122,38 @@ bool linklist::isEqual(spot value1, spot value2) {
     return ((value1.x == value2.x) && (value1.y == value2.y));
 }
 
-void linklist::search(spot value) {
-
+spot* linklist::search(spot value) {
+    node *q=this->start;
+    while(q->next!= nullptr)
+    {
+        q=q->next;
+        if(this->isEqual(q->info,value))
+            break;
+    }
+    return &(q->info);
 }
 
 void linklist::delThis(spot value) {
-    node *temp, *q = start, *prev, *next;
+    node *q = this->start, *prev=start, *next;
 
     while (q->next != nullptr) {
-        if (isEqual(q->next->info, value)) {
+        q = q->next;
+        if (isEqual(q->info, value)) {
             break;
         }
-        q = q->next;
     }
-    temp = q->next;
-    next = temp->next;
-    prev = temp->prev;
-    prev->next = next;
-    if (next != nullptr)
-        next->prev = prev;
+    if(q->next== nullptr)
+    {
+        q->prev->next=nullptr;
+    }
+    else
+    {
+        prev=q->prev;
+        next=q->next;
+        prev->next=next;
+        next->prev=prev;
+        cout<<endl;
+    }
 
 }
 
