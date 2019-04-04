@@ -11,6 +11,7 @@ spot::spot() {
     this->f = 99;
     this->g = 0;
     this->h = 0;
+
 }
 
 spot::spot(int x, int y) {
@@ -30,14 +31,16 @@ int spot::cal_F(spot prev, spot goal) {
 }
 
 void spot::getNeighbor() {
-    neighbor[Up][X] = (this->y==0)?NOTSPOT:this->x;
-    neighbor[Up][Y] = (this->y==0)?NOTSPOT:this->y - 1;
-    neighbor[Down][X] = (this->y==COL-1)?NOTSPOT:this->x;
-    neighbor[Down][Y] = (this->y==COL-1)?NOTSPOT:this->y + 1;
-    neighbor[Left][X]=(this->x==0)?NOTSPOT:this->x-1;
-    neighbor[Left][Y]=(this->x==0)?NOTSPOT:this->y;
-    neighbor[Right][X] = (this->x==ROW-1)?NOTSPOT:this->x + 1;
-    neighbor[Right][Y] = (this->x==ROW-1)?NOTSPOT:this->y;
+
+        neighbor[Up][X] = ((map[x][y - 1] == 1) || (this->y == 0)) ? NOTSPOT : this->x;
+        neighbor[Up][Y] = ((map[x][y - 1] == 1) || (this->y == 0)) ? NOTSPOT : this->y - 1;
+        neighbor[Down][X] = ((map[x][y + 1] == 1) || (this->y == COL - 1)) ? NOTSPOT : this->x;
+        neighbor[Down][Y] = ((map[x][y + 1] == 1) || (this->y == COL - 1)) ? NOTSPOT : this->y + 1;
+        neighbor[Left][X] = ((map[x - 1][y] == 1) || (this->x == 0)) ? NOTSPOT : this->x - 1;
+        neighbor[Left][Y] = ((map[x - 1][y] == 1) || (this->x == 0)) ? NOTSPOT : this->y;
+        neighbor[Right][X] = ((map[x + 1][y] == 1) || (this->x == ROW - 1)) ? NOTSPOT : this->x + 1;
+        neighbor[Right][Y] = ((map[x + 1][y] == 1) || (this->x == ROW - 1)) ? NOTSPOT : this->y;
+
 }
 
 linklist::linklist() {
@@ -73,7 +76,6 @@ void linklist::addBegin(spot value) {
     temp->next = start->next;
     start->next = temp;
 
-    cout << "element inserted at begin" << endl;
 }
 
 void linklist::addEnd(spot value) {
@@ -88,14 +90,13 @@ void linklist::addEnd(spot value) {
     temp->next = nullptr;
     q->next = temp;
 
-    cout << "element inserted at end" << endl;
 }
 
 spot *linklist::smallF() {
     node *q = start;
     while (q->next != nullptr) {
         q = q->next;
-        if (q->info.f < small->info.f)
+        if (q->info.f <= small->info.f)
             small = q;
     }
     return &(small->info);

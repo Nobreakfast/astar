@@ -5,21 +5,12 @@
 using namespace std;
 
 int main() {
+    int flag=0;
     std::cout << "Hello, World!" << std::endl;
-    int map[8][8] = {
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-    };
     linklist open, close;
     open.init();
     close.init();
-    spot start(1, 1), goal(2, 2);
+    spot start(1, 1), goal(7, 7);
     start.f=3;
     open.addEnd(start);
 
@@ -37,9 +28,11 @@ int main() {
             neighbor[i].x=q->neighbor[i][X];
             neighbor[i].y=q->neighbor[i][Y];
 
-
-            if(!open.isEqual(neighbor[i],goal))
+            if(neighbor[i].x==NOTSPOT)
+                continue;
+            if(open.isEqual(neighbor[i],goal))
             {
+                flag=1;
                     break;
             }
 
@@ -62,6 +55,7 @@ int main() {
                 open.addEnd(neighbor[i]) ;
         }
         close.addEnd(*q);
+        if(flag){flag=0;break;}
     }
     open.printList();
     cout<<"next"<<endl;
