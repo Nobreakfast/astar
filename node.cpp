@@ -127,7 +127,7 @@ bool linklist::isExist(spot value) {
         if ((q->info.x == value.x) && (q->info.y == value.y))
             a = 1;
     }
-    return a == 1;
+    return (a == 1);
 
 }
 
