@@ -15,6 +15,7 @@ int main() {
     start.g=0;
     open.addEnd(start);
     spot map[ROW][COL];
+    spot* neighbor[4];
     for(int i=0;i<ROW;++i){
         for(int j=0;j<COL;++j){
             map[i][j].g=99;
@@ -37,7 +38,6 @@ int main() {
         q->getNeighbor();
 
 
-        spot* neighbor[4];
         neighbor[0]=&map[q->neighbor[Up][X]][q->neighbor[Up][Y]];
         neighbor[1]=&map[q->neighbor[Down][X]][q->neighbor[Down][Y]];
         neighbor[2]=&map[q->neighbor[Left][X]][q->neighbor[Left][Y]];
