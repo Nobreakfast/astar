@@ -47,6 +47,8 @@ int main() {
         else
             cout<<"no"<<endl;
         for (auto i:neighbor) {
+            if(i->x==NOTSPOT)
+                continue;
             if (close.isExist(*i))
                 continue;
             int test=q->g+1;
