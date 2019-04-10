@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <math.h>
+
 using namespace std;
 #define NOTSPOT 99
 #define ROW 8

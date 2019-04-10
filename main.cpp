@@ -1,7 +1,7 @@
 #include <iostream>
 #include "node.h"
 #include <math.h>
-
+#include <conio.h>
 using namespace std;
 
 int main() {
@@ -25,6 +25,14 @@ int main() {
         }
     }
     while (!open.isEmpty()) {
+
+        int ch;
+            if(_kbhit()) {
+                ch = _getch();
+                cout << ch;
+                if(ch==27) break;
+            }
+
         spot *q=open.smallH();
 
         if(open.isEqual(*q,goal))
@@ -42,10 +50,7 @@ int main() {
         neighbor[1]=&map[q->neighbor[Down][X]][q->neighbor[Down][Y]];
         neighbor[2]=&map[q->neighbor[Left][X]][q->neighbor[Left][Y]];
         neighbor[3]=&map[q->neighbor[Right][X]][q->neighbor[Right][Y]];
-        if(close.isExist(*neighbor[0]))
-            cout<<"yes"<<endl;
-        else
-            cout<<"no"<<endl;
+
         for (auto i:neighbor) {
             if(i->x==NOTSPOT)
                 continue;
