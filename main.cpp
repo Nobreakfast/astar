@@ -1,7 +1,6 @@
 #include <iostream>
 #include "node.h"
 #include <math.h>
-#include <conio.h>
 using namespace std;
 
 int main() {
@@ -26,14 +25,8 @@ int main() {
     }
     while (!open.isEmpty()) {
 
-        int ch;
-            if(_kbhit()) {
-                ch = _getch();
-                cout << ch;
-                if(ch==27) break;
-            }
 
-        spot *q=open.smallH();
+        spot *q=open.smallF();
 
         if(open.isEqual(*q,goal))
         {
@@ -65,8 +58,6 @@ int main() {
             i->g=test;
             i->f=i->g+abs(i->x-goal.x)+abs(i->y-goal.y);
         }
-
-
     }
     open.printList();
     cout<<"next"<<endl;
