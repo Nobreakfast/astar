@@ -51,15 +51,15 @@ int node::cal_G() {
     return this->g;
 }
 
-void node::getNeighbor(int map[ROW][COL]) {
-    neighbor[Up][X] = ((map[x][y - 1] == 1) || (this->y == 0)) ? NOTSPOT : this->x;
-    neighbor[Up][Y] = ((map[x][y - 1] == 1) || (this->y == 0)) ? NOTSPOT : this->y - 1;
-    neighbor[Down][X] = ((map[x][y + 1] == 1) || (this->y == COL - 1)) ? NOTSPOT : this->x;
-    neighbor[Down][Y] = ((map[x][y + 1] == 1) || (this->y == COL - 1)) ? NOTSPOT : this->y + 1;
-    neighbor[Left][X] = ((map[x - 1][y] == 1) || (this->x == 0)) ? NOTSPOT : this->x - 1;
-    neighbor[Left][Y] = ((map[x - 1][y] == 1) || (this->x == 0)) ? NOTSPOT : this->y;
-    neighbor[Right][X] = ((map[x + 1][y] == 1) || (this->x == ROW - 1)) ? NOTSPOT : this->x + 1;
-    neighbor[Right][Y] = ((map[x + 1][y] == 1) || (this->x == ROW - 1)) ? NOTSPOT : this->y;
+void node::getNeighbor(char map[ROW][COL]) {
+    neighbor[Up][X] = ((map[x][y - 1] == '1') || (this->y == 0)) ? NOTSPOT : this->x;
+    neighbor[Up][Y] = ((map[x][y - 1] == '1') || (this->y == 0)) ? NOTSPOT : this->y - 1;
+    neighbor[Down][X] = ((map[x][y + 1] == '1') || (this->y == COL - 1)) ? NOTSPOT : this->x;
+    neighbor[Down][Y] = ((map[x][y + 1] == '1') || (this->y == COL - 1)) ? NOTSPOT : this->y + 1;
+    neighbor[Left][X] = ((map[x - 1][y] == '1') || (this->x == 0)) ? NOTSPOT : this->x - 1;
+    neighbor[Left][Y] = ((map[x - 1][y] == '1') || (this->x == 0)) ? NOTSPOT : this->y;
+    neighbor[Right][X] = ((map[x + 1][y] == '1') || (this->x == ROW - 1)) ? NOTSPOT : this->x + 1;
+    neighbor[Right][Y] = ((map[x + 1][y] == '1') || (this->x == ROW - 1)) ? NOTSPOT : this->y;
 }
 
 linklist::linklist() {
@@ -197,15 +197,34 @@ void Astar::calculate() {
             i->camefrom=current;
         }
     }
-    this->end=this->current;
-    cout<<"finished"<<endl;
+    if(open.isEmpty())
+    {
+        cout<<"it does not have a path to End:"<<this->end->x<<"\t"<<this->end->y<<endl;
+        flag=0;
+    }
+    else{
+        cout<<"finished"<<endl;
+        this->end=this->current;
+        flag=1;
+    }
 }
 
 void Astar::printPath() {
+    if(this->flag==0)
+        return;
     node *q=this->end;
     while(q!=this->start){
         cout<<"X:"<<q->x<<"\tY:"<<q->y<<endl;
         q=q->camefrom;
+        this->map[q->x][q->y]='*';
     }
     cout<<"X:"<<q->x<<"\tY:"<<q->y<<endl;
+    this->map[this->start->x][this->start->y]='#';
+    this->map[this->end->x][this->end->y]='#';
+
+    for(auto i:this->map){
+        for(int j=0;j<COL;++j)
+            cout<<i[j]<<"\t";
+        cout<<endl;
+    }
 }

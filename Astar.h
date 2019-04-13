@@ -37,7 +37,7 @@ public:
     int cal_F();
     int cal_H(node value);
     int cal_G();
-    void getNeighbor(int map[ROW][COL]);
+    void getNeighbor(char map[ROW][COL]);
 
 };
 
@@ -56,15 +56,15 @@ public:
 
 class Astar {
 public:
-    int map[ROW][COL] = {
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 0, 0, 0},
-            {0, 1, 1, 0, 1, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0},
+    char map[ROW][COL] = {
+            {'0', '0', '0', '0', '0', '0', '0', '0'},
+            {'0', '0', '0', '0', '1', '0', '0', '0'},
+            {'0', '0', '0', '0', '1', '0', '0', '0'},
+            {'0', '0', '0', '0', '1', '0', '0', '0'},
+            {'0', '0', '1', '1', '1', '0', '0', '0'},
+            {'1', '1', '1', '0', '1', '0', '0', '0'},
+            {'0', '0', '0', '0', '0', '0', '0', '0'},
+            {'0', '0', '0', '0', '0', '0', '0', '0'},
     };
     node *start,*end;
     node spot[ROW][COL];
@@ -72,6 +72,7 @@ public:
     node stone;
     node *current;
     linklist open,close;
+    int flag=1;
     Astar();
     Astar(int value[2][2]);
     bool isGoal();
