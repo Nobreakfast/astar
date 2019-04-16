@@ -4,7 +4,7 @@
 This algorithm class is written based on the [Wikipedia: A* Searching Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
 It is easy to complete, and hope it could help you guys.  This is  a quite simple version, and I will add more function to perfect it.    
 Any questions or advices can leave comments or [email](haocheng.zhao14@student.xjtlu.edu.cn) me. 
-##Usage
+## Usage
 ### Header File
 Please inlcude the _`Astar.h`_ , _`math.h`_ and _`iostream`_
 ````
