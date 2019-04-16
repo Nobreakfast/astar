@@ -1,4 +1,4 @@
-#A Star Searching Algorithm
+# A Star Searching Algorithm
 > Reference: [Wikipedia: A* Searching Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm)
 ##Intro
 This algorithm class is written based on the [Wikipedia: A* Searching Algorithm](https://en.wikipedia.org/wiki/A*_search_algorithm).
