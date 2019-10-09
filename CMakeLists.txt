@@ -4,4 +4,3 @@ project(astar)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(astar main.cpp Astar.cpp Astar.h)
-
